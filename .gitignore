@@ -1,0 +1,4 @@
+### VisualStudioCode ###
+.vscode/*
+
+__pycache__

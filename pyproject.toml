@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "expenses-server-fastapi"
+version = "0.1.0"
+description = "Python server for expenses using fastapi"
+authors = ["Dinika Saxena <dinikasaxenas@gmail.com>"]
+readme = "README.md"
+packages = [{include = "expenses_server_fastapi"}]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["all"], version = "^0.110.0"}
+sqlalchemy = "^2.0.28"
+pydantic = "^2.6.3"
+uuid = "^1.30"
+psycopg2-binary = "^2.9.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
