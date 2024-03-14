@@ -1,5 +1,15 @@
 from uuid import uuid4
-from sqlalchemy import TIMESTAMP, UUID, Column, Float, ForeignKey, Integer, String, Text
+from sqlalchemy import (
+    TIMESTAMP,
+    UUID,
+    Column,
+    Float,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+    func,
+)
 from sqlalchemy.orm import relationship
 from expenses_server_fastapi.db import Base
 
@@ -12,12 +22,12 @@ class Expense(Base):
     amount = Column(Float, nullable=False)
     # TODO: Restrict type of currency
     currency = Column(String, nullable=False)
-    timestamp = Column(TIMESTAMP, nullable=False)
+    timestamp = Column(TIMESTAMP, nullable=False, default=func.now())
     description = Column(Text)
 
     category_id = Column(Integer, ForeignKey("categories.id"))
-    category = relationship("category", back_populates="expenses")
+    category = relationship("Category", back_populates="expenses")
 
     # TODO: Check if back_populates and corresponding value in account is needed
     account_id = Column(Integer, ForeignKey("accounts.id"))
-    account = relationship("account", back_populates="expenses")
+    account = relationship("Account", back_populates="expenses")

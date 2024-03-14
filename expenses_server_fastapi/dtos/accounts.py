@@ -1,7 +1,8 @@
-from pydantic import UUID4, BaseModel
+from pydantic import BaseModel
+
 
 class Account(BaseModel):
-    id: UUID4
+    id: int
     name: str
 
     class Config:

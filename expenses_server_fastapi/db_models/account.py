@@ -8,4 +8,4 @@ class Account(Base):
     __tablename__ = "accounts"
     id = Column(Integer, primary_key=True, default=uuid4)
     name = Column(String, unique=True)
-    expenses = relationship("Expenses", back_populates="account")
+    expenses = relationship("Expense", back_populates="account")
