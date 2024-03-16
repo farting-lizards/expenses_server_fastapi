@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 
-from expenses_server_fastapi.db import get_db
-from expenses_server_fastapi.db_models.category import Category
-from expenses_server_fastapi.dtos.expenses import Expense, ExpenseCreate
-from expenses_server_fastapi.db_models.expense import Expense as DBExpense
+from ..db import get_db
+from ..db_models.category import Category
+from ..dtos.expenses import Expense, ExpenseCreate
+from ..db_models.expense import Expense as DBExpense
 from sqlalchemy.orm import Session
 
 
@@ -11,7 +11,9 @@ router = APIRouter(prefix="/expenses")
 
 
 @router.post("", response_model=Expense)
-async def create_expense(expense: ExpenseCreate, session: Session = Depends(get_db)):
+async def create_expense(
+    expense: ExpenseCreate, session: Session = Depends(get_db)
+) -> DBExpense:
     db_category = (
         session.query(Category).filter(Category.name == expense.category_name).first()
     )

@@ -1,11 +1,12 @@
 from fastapi import FastAPI
-from expenses_server_fastapi.db import Base, engine
+from .db import engine
+from .db_models.core import Base
 from .routes.accounts import router as account_router
 from .routes.expenses import router as expense_router
 from sqlalchemy import event
-from expenses_server_fastapi.db_models.account import Account
-from expenses_server_fastapi.db_models.category import Category
-from expenses_server_fastapi.seed_db import populate_accounts, populate_categories
+from .db_models.account import Account
+from .db_models.category import Category
+from .seed_db import populate_accounts, populate_categories
 
 app = FastAPI()
 
@@ -17,7 +18,7 @@ Base.metadata.create_all(bind=engine)
 
 
 @app.get("/")
-async def root():
+async def root() -> dict[str, str]:
     return {"message": "Hello World"}
 
 

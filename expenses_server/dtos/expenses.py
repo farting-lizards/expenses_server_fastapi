@@ -1,8 +1,8 @@
 from datetime import datetime
 from pydantic import UUID4, BaseModel
 
-from expenses_server_fastapi.dtos.accounts import Account
-from expenses_server_fastapi.dtos.categories import CategoryEnum
+from .accounts import Account
+from .categories import CategoryEnum
 
 
 class ExpenseBase(BaseModel):

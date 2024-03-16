@@ -1,5 +1,6 @@
 from typing import Any
-from sqlalchemy import Table, Connection
+from sqlalchemy import Table
+from sqlalchemy.engine.base import Connection
 
 
 categories_data = [
