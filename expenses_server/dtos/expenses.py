@@ -1,13 +1,14 @@
 from datetime import datetime
 from pydantic import UUID4, BaseModel
 
+from .categories import Category
 from .accounts import Account
-from .categories import CategoryEnum
+from .currencies import CurrencyEnum
 
 
 class ExpenseBase(BaseModel):
     amount: float
-    currency: CategoryEnum  # TODO: In OpenApI this does not show option "EUR"
+    currency: CurrencyEnum  # TODO: In OpenApI this does not show option "EUR"
     description: str | None
     category_name: str = "other"
     account_id: int
@@ -23,8 +24,9 @@ class Expense(BaseModel):
     timestamp: datetime
     account: Account
     amount: float
-    currency: CategoryEnum
+    currency: CurrencyEnum
     description: str | None
+    category: Category
 
     class Config:
         form_attributes = True

@@ -1,6 +1,9 @@
-from enum import Enum
+from pydantic import BaseModel
 
 
-class CategoryEnum(Enum):
-    CHF = "CHF"
-    EUR = "EUR"
+class Category(BaseModel):
+    id: int
+    name: str
+
+    class Config:
+        form_attributes = True

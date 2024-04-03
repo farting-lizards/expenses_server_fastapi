@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Python server for expenses using fastapi"
 authors = ["Dinika Saxena <dinikasaxenas@gmail.com>"]
 readme = "README.md"
-packages = [{include = "expenses_server_fastapi"}]
+packages = [{include = "expenses_server"}]
 
 [tool.poetry.dependencies]
 python = "^3.12"
@@ -22,6 +22,7 @@ ruff = "^0.3.3"
 uvicorn = "^0.28.0"
 pyright = "^1.1.354"
 mypy = "^1.9.0"
+pytest = "^8.1.1"
 
 [build-system]
 requires = ["poetry-core"]
