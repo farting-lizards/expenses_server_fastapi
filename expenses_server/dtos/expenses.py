@@ -1,6 +1,5 @@
 from datetime import datetime
 from pydantic import UUID4, BaseModel
-
 from .categories import Category
 from .accounts import Account
 from .currencies import CurrencyEnum
@@ -16,10 +15,10 @@ class ExpenseBase(BaseModel):
 
 class ExpenseCreate(ExpenseBase):
     class Config:
-        form_attributes = True
+        from_attributes = True
 
 
-class Expense(BaseModel):
+class ExpenseDTO(BaseModel):
     id: UUID4
     timestamp: datetime
     account: Account
@@ -29,4 +28,4 @@ class Expense(BaseModel):
     category: Category
 
     class Config:
-        form_attributes = True
+        from_attributes = True

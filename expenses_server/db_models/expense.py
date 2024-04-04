@@ -34,7 +34,7 @@ class Expense(Base):
     )
 
     external_id: Mapped[str | None] = mapped_column(unique=True, default=None)
-    id: Mapped[UUID] = mapped_column(primary_key=True, default=uuid4())
+    id: Mapped[UUID] = mapped_column(primary_key=True, default_factory=uuid4)
     timestamp: Mapped[str] = mapped_column(
         TIMESTAMP, nullable=False, default=func.now()
     )

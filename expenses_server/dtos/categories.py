@@ -6,4 +6,4 @@ class Category(BaseModel):
     name: str
 
     class Config:
-        form_attributes = True
+        from_attributes = True
