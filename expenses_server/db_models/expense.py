@@ -1,10 +1,5 @@
 from uuid import uuid4, UUID
-from sqlalchemy import (
-    TIMESTAMP,
-    ForeignKey,
-    Text,
-    func,
-)
+from sqlalchemy import TIMESTAMP, ForeignKey, Text, func, types, text
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from .core import Base
 from typing import TYPE_CHECKING
@@ -34,7 +29,11 @@ class Expense(Base):
     )
 
     external_id: Mapped[str | None] = mapped_column(unique=True, default=None)
-    id: Mapped[UUID] = mapped_column(primary_key=True, default_factory=uuid4)
+    id: Mapped[UUID] = mapped_column(
+        types.UUID,
+        default_factory=uuid4,
+        primary_key=True,
+    )
     timestamp: Mapped[str] = mapped_column(
         TIMESTAMP, nullable=False, default=func.now()
     )

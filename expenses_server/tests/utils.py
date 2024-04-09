@@ -1,12 +1,10 @@
 from typing import Any, cast
 from fastapi.testclient import TestClient
 
-from expenses_server.dtos.expenses import ExpenseDTO
-
 
 def create_mock_expense(
     client: TestClient, extra: dict[str, Any] | None = None
-) -> ExpenseDTO:
+) -> dict:
     payload = (
         {
             "amount": 10,
@@ -27,4 +25,4 @@ def create_mock_expense(
     )
     response = client.post("/expenses", json=payload)
     assert response.status_code == 200
-    return cast(ExpenseDTO, response.json())
+    return cast(dict, response.json())

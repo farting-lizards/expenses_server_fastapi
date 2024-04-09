@@ -15,7 +15,7 @@ def test_client() -> Generator[TestClient, None, None]:
 @pytest.fixture()
 def test_expenses(
     test_client: TestClient,
-) -> Generator[tuple[TestClient, list[ExpenseDTO]], None, None]:
+) -> Generator[tuple[TestClient, list[dict]], None, None]:
     expense1 = create_mock_expense(test_client)
     print("EXPENSE1", expense1)
     expense2 = create_mock_expense(test_client, extra={"account_id": 2})

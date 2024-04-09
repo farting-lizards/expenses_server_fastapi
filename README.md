@@ -11,3 +11,10 @@
 ```sh
 poetry run uvicorn expenses_server.main:app --reload --port=8090 --use-colors
 ```
+
+3. Running tests
+
+```sh
+poetry run pytest # runs all tests
+poetry run pytest -s --pdb # helpful for debugging tests
+```

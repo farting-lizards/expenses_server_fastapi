@@ -18,6 +18,14 @@ class ExpenseCreate(ExpenseBase):
         from_attributes = True
 
 
+class ExpenseUpdate(BaseModel):
+    amount: float | None = None
+    currency: CurrencyEnum | None = None
+    description: str | None = None
+    category_name: str | None = None
+    account_id: int | None = None
+
+
 class ExpenseDTO(BaseModel):
     id: UUID4
     timestamp: datetime
