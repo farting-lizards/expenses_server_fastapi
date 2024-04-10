@@ -17,7 +17,7 @@ categories_data = [
     {"id": 11, "name": "hobbies"},
     {"id": 12, "name": "atm"},
     {"id": 13, "name": "other"},
-    {"id": 13, "name": "entertainment"},
+    {"id": 14, "name": "entertainment"},
 ]
 
 

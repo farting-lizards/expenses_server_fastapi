@@ -41,6 +41,14 @@ async def get_all_expenses(session: Session = Depends(get_db)) -> list[ExpenseDT
     return expenses
 
 
+@router.get("/{expense_id}", response_model=ExpenseDTO)
+async def get_expenses(
+    expense_id: UUID4, session: Session = Depends(get_db)
+) -> ExpenseDTO:
+    db_expense = session.get(DBExpense, expense_id)
+    return ExpenseDTO.model_validate(db_expense)
+
+
 @router.patch("/{expense_id}", response_model=ExpenseDTO)
 async def update_expense(
     expense_id: UUID4, expense_update: ExpenseUpdate, session: Session = Depends(get_db)
