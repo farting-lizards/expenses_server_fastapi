@@ -1,5 +1,5 @@
-from uuid import UUID
-from fastapi import APIRouter, Depends
+from http import HTTPStatus
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import UUID4
 
 from ..db import get_db
@@ -46,6 +46,11 @@ async def get_expenses(
     expense_id: UUID4, session: Session = Depends(get_db)
 ) -> ExpenseDTO:
     db_expense = session.get(DBExpense, expense_id)
+    if db_expense is None:
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND,
+            detail=f"Expense with id {expense_id} not found",
+        )
     return ExpenseDTO.model_validate(db_expense)
 
 
@@ -59,3 +64,20 @@ async def update_expense(
     session.commit()
     updated_expense = session.get(DBExpense, expense_id)
     return ExpenseDTO.model_validate(updated_expense)
+
+
+@router.delete("/{expense_id}", response_model=ExpenseDTO)
+async def delete_expenses(
+    expense_id: UUID4, db: Session = Depends(get_db)
+) -> ExpenseDTO:
+    db_expense = db.get(DBExpense, expense_id)
+    if db_expense is None:
+        raise HTTPException(
+            status_code=HTTPStatus.NOT_FOUND,
+            detail=f"Expense with id {expense_id} not found",
+        )
+
+    expense = ExpenseDTO.model_validate(db_expense)
+    db.delete(db_expense)
+    db.commit()
+    return expense

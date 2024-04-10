@@ -1,7 +1,7 @@
+from http import HTTPStatus
 from typing import Generator
 from fastapi.testclient import TestClient
 import pytest
-from expenses_server.dtos.expenses import ExpenseDTO
 from expenses_server.main import app
 from expenses_server.tests.utils import create_mock_expense
 
@@ -22,4 +22,7 @@ def test_expenses(
     print("EXPENSE2", expense2)
 
     yield test_client, [expense1, expense2]
-    # TODO: Delete mock expenses
+
+    for expense in [expense1, expense2]:
+        response = test_client.delete(f'/expenses/{expense["id"]}')
+        assert response.status_code in [HTTPStatus.NOT_FOUND, HTTPStatus.OK]

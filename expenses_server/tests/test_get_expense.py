@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
 
-def test_get_all_expenses(test_expenses: tuple[TestClient, list[dict]]) -> None:
+def test_get_expense(test_expenses: tuple[TestClient, list[dict]]) -> None:
     client, mock_expenses = test_expenses
     expense_id = mock_expenses[0]["id"]
     response = client.get(f"/expenses/{expense_id}")
