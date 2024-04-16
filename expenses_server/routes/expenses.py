@@ -36,13 +36,13 @@ async def create_expense(
 
 @router.get("", response_model=list[ExpenseDTO])
 async def get_all_expenses(session: Session = Depends(get_db)) -> list[ExpenseDTO]:
-    db_expenses = session.query(DBExpense).all()
+    db_expenses = session.query(DBExpense).order_by(DBExpense.timestamp.desc()).all()
     expenses = [ExpenseDTO.model_validate(expense) for expense in db_expenses]
     return expenses
 
 
 @router.get("/{expense_id}", response_model=ExpenseDTO)
-async def get_expenses(
+async def get_expense(
     expense_id: UUID4, session: Session = Depends(get_db)
 ) -> ExpenseDTO:
     db_expense = session.get(DBExpense, expense_id)
