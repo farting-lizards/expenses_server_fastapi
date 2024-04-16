@@ -1,5 +1,6 @@
 from datetime import datetime
-from pydantic import UUID4, BaseModel
+from typing import Annotated
+from pydantic import UUID4, BaseModel, Field, computed_field, field_serializer
 from .categories import Category
 from .accounts import Account
 from .currencies import CurrencyEnum
@@ -34,6 +35,10 @@ class ExpenseDTO(BaseModel):
     currency: CurrencyEnum
     description: str | None
     category: Category
+
+    @field_serializer("category")
+    def serialize_category(self, category: Category) -> str:
+        return category.name
 
     class Config:
         from_attributes = True
