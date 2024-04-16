@@ -1,6 +1,10 @@
+from curses.panel import update_panels
 from http import HTTPStatus
+from typing import cast
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import UUID4
+
+from expenses_server.dtos.currencies import CurrencyEnum
 
 from ..db import get_db
 from ..db_models.category import Category
@@ -58,8 +62,24 @@ async def get_expense(
 async def update_expense(
     expense_id: UUID4, expense_update: ExpenseUpdate, session: Session = Depends(get_db)
 ) -> ExpenseDTO:
+    # TODO: Ask David - How to best refactor this
+    payload = expense_update.model_dump(exclude_none=True)
+
+    # Replace category_name with category_id
+    if payload.get("category_name") is not None:
+        db_category = (
+            session.query(Category)
+            .filter(Category.name == payload.get("category_name", "other"))
+            .first()
+        )
+        del payload["category_name"]
+        payload["category_id"] = db_category.id if db_category is not None else 13
+    # Replace currency name with currency
+    if payload.get("currency"):
+        payload["currency"] = cast(CurrencyEnum, payload["currency"]).value
+
     session.query(DBExpense).filter(DBExpense.id == expense_id).update(
-        values=expense_update.model_dump(exclude_none=True)  # type: ignore
+        values=payload  # type: ignore
     )
     session.commit()
     updated_expense = session.get(DBExpense, expense_id)
