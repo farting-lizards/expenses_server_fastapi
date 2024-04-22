@@ -23,6 +23,6 @@ def create_mock_expense(
             **extra,
         }
     )
-    response = client.post("/expenses", json=payload)
+    response = client.post("/api/expenses", json=payload)
     assert response.status_code == 200
     return cast(dict, response.json())

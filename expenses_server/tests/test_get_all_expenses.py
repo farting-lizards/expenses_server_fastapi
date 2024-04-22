@@ -6,7 +6,7 @@ from expenses_server.dtos.expenses import ExpenseDTO
 
 def test_get_all_expenses(test_expenses: tuple[TestClient, list[ExpenseDTO]]) -> None:
     client, mock_expenses = test_expenses
-    response = client.get("/expenses")
+    response = client.get("/api/expenses")
     assert response.status_code == 200
     expenses = cast(list[ExpenseDTO], response.json())
     assert len(expenses) >= len(mock_expenses)

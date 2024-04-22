@@ -12,7 +12,9 @@ def test_update_expense(test_expenses: tuple[TestClient, list[dict]]) -> None:
     expected_response = copy.deepcopy(expense_before_update)
     expected_response.update(payload)
 
-    response = client.patch(f"/expenses/{expense_before_update["id"]}", json=payload)
+    response = client.patch(
+        f"/api/expenses/{expense_before_update["id"]}", json=payload
+    )
     assert response.status_code == 200
     actual_response = response.json()
     assert actual_response == expected_response
