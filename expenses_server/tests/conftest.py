@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Generator
+from typing import Any, Generator
 from fastapi.testclient import TestClient
 import pytest
 from expenses_server.main import app
@@ -15,7 +15,7 @@ def test_client() -> Generator[TestClient, None, None]:
 @pytest.fixture()
 def test_expenses(
     test_client: TestClient,
-) -> Generator[tuple[TestClient, list[dict]], None, None]:
+) -> Generator[tuple[TestClient, list[dict[str, Any]]], None, None]:
     expense1 = create_mock_expense(test_client)
     print("EXPENSE1", expense1)
     expense2 = create_mock_expense(test_client, extra={"account_id": 2})

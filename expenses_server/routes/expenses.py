@@ -1,4 +1,3 @@
-from curses.panel import update_panels
 from http import HTTPStatus
 from typing import cast
 from fastapi import APIRouter, Depends, HTTPException

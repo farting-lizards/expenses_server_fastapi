@@ -4,7 +4,7 @@ from fastapi.testclient import TestClient
 
 def create_mock_expense(
     client: TestClient, extra: dict[str, Any] | None = None
-) -> dict:
+) -> dict[str, Any]:
     payload = (
         {
             "amount": 10,
@@ -25,4 +25,4 @@ def create_mock_expense(
     )
     response = client.post("/api/expenses", json=payload)
     assert response.status_code == 200
-    return cast(dict, response.json())
+    return cast(dict[str, Any], response.json())

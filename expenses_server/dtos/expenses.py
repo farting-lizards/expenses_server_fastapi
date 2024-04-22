@@ -1,6 +1,5 @@
 from datetime import datetime
-from typing import Annotated
-from pydantic import UUID4, BaseModel, Field, computed_field, field_serializer
+from pydantic import UUID4, BaseModel, field_serializer
 from .categories import Category
 from .accounts import Account
 from .currencies import CurrencyEnum

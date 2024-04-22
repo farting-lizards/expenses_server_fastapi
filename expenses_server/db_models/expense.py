@@ -1,5 +1,5 @@
 from uuid import uuid4, UUID
-from sqlalchemy import TIMESTAMP, ForeignKey, Text, func, types, text
+from sqlalchemy import TIMESTAMP, ForeignKey, Text, func, types
 from sqlalchemy.orm import relationship, Mapped, mapped_column
 from .core import Base
 from typing import TYPE_CHECKING

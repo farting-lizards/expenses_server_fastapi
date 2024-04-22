@@ -1,8 +1,11 @@
 from http import HTTPStatus
+from typing import Any
 from fastapi.testclient import TestClient
 
 
-def test_delete_expenses(test_expenses: tuple[TestClient, list[dict]]) -> None:
+def test_delete_expenses(
+    test_expenses: tuple[TestClient, list[dict[str, Any]]],
+) -> None:
     client, mock_expenses = test_expenses
     expense_id = mock_expenses[0]["id"]
     response = client.delete(f"/api/expenses/{expense_id}")
