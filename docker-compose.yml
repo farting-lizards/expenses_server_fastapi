@@ -3,7 +3,7 @@ volumes:
 
 services:
   expenses_db:
-    image: postgres:latest
+    image: docker.io/postgres:latest
     container_name: expenses_db
     environment:
       POSTGRES_USER: expenses
