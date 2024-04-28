@@ -32,6 +32,17 @@ test = ["anyio[trio]", "coverage[toml] (>=7)", "exceptiongroup (>=1.2.0)", "hypo
 trio = ["trio (>=0.23)"]
 
 [[package]]
+name = "bats-core-pkg"
+version = "0.1.10.post2"
+description = "Python wrapper on tops of bats-core"
+optional = false
+python-versions = ">=3.7,<4.0"
+files = [
+    {file = "bats_core_pkg-0.1.10.post2-py3-none-any.whl", hash = "sha256:fe9c4deb12bdaea64bd06d18ac0680003f47d18242d1bcf500034813a88e7be6"},
+    {file = "bats_core_pkg-0.1.10.post2.tar.gz", hash = "sha256:db687c13b8f0fafba4bed2996f4ae3d7bbad9f8aba6cd37dd72f9abe9960950d"},
+]
+
+[[package]]
 name = "certifi"
 version = "2024.2.2"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -1532,4 +1543,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "8b8a7caef8989d1defacc722cc6eda93886c7e453759f0b42b3b3438cce4b4fc"
+content-hash = "b02c22fdef5b404306c93b6cc3b1848f4f53a67943916fd0bcfaf92eb6cc2a0c"
