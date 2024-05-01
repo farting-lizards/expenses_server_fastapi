@@ -12,7 +12,7 @@ from expenses_server.settings import settings
 # access to the values within the .ini file in use.
 config = context.config
 
-config.set_main_option("sqlalchemy.url", settings.DB_URL.unicode_string())
+config.set_main_option("sqlalchemy.url", settings.db_url.unicode_string())
 
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
