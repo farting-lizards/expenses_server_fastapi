@@ -1,5 +1,5 @@
 from fastapi import APIRouter, FastAPI
-from fastapi.responses import RedirectResponse, FileResponse
+from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from .settings import settings
