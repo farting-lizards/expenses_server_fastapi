@@ -1,14 +1,9 @@
 from typing import Generator
-from pydantic_core import MultiHostUrl
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, Session
-from pydantic import PostgresDsn
+from .settings import settings
 
-DB_URL: PostgresDsn = MultiHostUrl(
-    "postgresql://expenses:expenses@localhost:15000/expenses"
-)
-
-engine = create_engine(DB_URL.unicode_string(), echo=True)
+engine = create_engine(settings.db_url.unicode_string(), echo=True)
 
 SessionLocal = sessionmaker(autoflush=False, autocommit=False, bind=engine)
 
