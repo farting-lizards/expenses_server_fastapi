@@ -8,6 +8,9 @@ class Settings(BaseSettings):
         "postgresql://expenses:expenses@localhost:15000/expenses"
     )
     frontend_path: str | None = None  # "../expenses-react/build"
+
+    # Password
+    hash_algorithm: str = "sha256"
     password_seed: str = "dummy_seed"
 
 

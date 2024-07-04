@@ -6,6 +6,7 @@ from .settings import settings
 
 from .routes.accounts import router as account_router
 from .routes.expenses import router as expense_router
+from .routes.users import router as user_router
 
 app = FastAPI()
 
@@ -21,6 +22,7 @@ base_router = APIRouter(prefix="/api")
 
 base_router.include_router(account_router)
 base_router.include_router(expense_router)
+base_router.include_router(user_router)
 
 app.include_router(base_router)
 
