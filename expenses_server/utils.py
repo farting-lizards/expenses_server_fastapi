@@ -1,17 +1,16 @@
 from getpass import getpass
-import hashlib
 
 from expenses_server.db import get_db
 from expenses_server.db_models.user import User
-from expenses_server.settings import settings
 from expenses_server import main
 
 
 def hash_password(password: str) -> str:
-    # TODO: Rename m
-    m = hashlib.sha256()  # TODO: This should be consistent with settings.hash_algorithm
-    m.update((settings.password_seed + password).encode("utf8"))
-    return f"{settings.hash_algorithm}:{m.hexdigest()}"
+    return main.password_context.hash(password)
+
+
+def verify_password(plain_password: str, hashed_password: str) -> bool:
+    return main.password_context.verify(plain_password, hashed_password)
 
 
 def create_user(username: str) -> None:
