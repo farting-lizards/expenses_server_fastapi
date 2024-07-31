@@ -8,6 +8,7 @@ from sqlalchemy.exc import NoResultFound
 from expenses_server.db import get_db
 from expenses_server.db_models.user import User
 from expenses_server.dtos.users import UserToken, get_current_user
+from expenses_server.security import create_access_token
 from expenses_server.utils import verify_password
 
 
@@ -40,7 +41,8 @@ async def login(
                 status_code=HTTPStatus.BAD_REQUEST,
                 detail="Incorrect username or password",
             )
-        return UserToken(access_token=user.username, token_type="bearer")
+        access_token = create_access_token(data={"sub": user.username})
+        return UserToken(access_token=access_token, token_type="bearer")
     except NoResultFound:
         raise HTTPException(
             status_code=HTTPStatus.BAD_REQUEST, detail="Incorrect username or password"
