@@ -2,3 +2,6 @@
 .vscode/*
 
 __pycache__
+
+# Prod env vars
+.env

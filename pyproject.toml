@@ -15,6 +15,9 @@ uuid = "^1.30"
 psycopg2-binary = "^2.9.9"
 pydantic-settings = "^2.2.1"
 alembic = "^1.13.1"
+python-multipart = "^0.0.9"
+pyjwt = "^2.8.0"
+bcrypt = "^5.0.0"
 
 [tool.mypy]
 
@@ -27,6 +30,8 @@ mypy = "^1.9.0"
 pytest = "^8.1.1"
 bats-core-pkg = "^0.1.10.post2"
 
+
+[tool.poetry.group.types.dependencies]
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

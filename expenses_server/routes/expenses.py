@@ -11,7 +11,6 @@ from ..dtos.expenses import ExpenseDTO, ExpenseCreate, ExpenseUpdate
 from ..db_models.expense import Expense as DBExpense
 from sqlalchemy.orm import Session
 
-
 router = APIRouter(prefix="/expenses")
 
 
