@@ -22,17 +22,17 @@ def test_login_with_wrong_password(
 ) -> None:
     response = anonymous_client.post(
         "/api/users/token",
-        data={"username": TEST_USERNAME, "password": "wrong"},
+        data={"username": TEST_USERNAME, "password": "jokerswild"},
     )
-    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert response.status_code == HTTPStatus.UNAUTHORIZED
 
 
 def test_login_with_unknown_user(anonymous_client: TestClient) -> None:
     response = anonymous_client.post(
         "/api/users/token",
-        data={"username": "who-is-this", "password": TEST_PASSWORD},
+        data={"username": "alan-parson", "password": TEST_PASSWORD},
     )
-    assert response.status_code == HTTPStatus.BAD_REQUEST
+    assert response.status_code == HTTPStatus.UNAUTHORIZED
 
 
 def test_protected_routes_require_token(anonymous_client: TestClient) -> None:

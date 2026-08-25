@@ -8,8 +8,8 @@ from expenses_server.db_models.user import User
 from expenses_server.utils import hash_password
 from expenses_server.tests.utils import create_mock_expense
 
-TEST_USERNAME = "testuser"
-TEST_PASSWORD = "test-password"
+TEST_USERNAME = "pinkie"
+TEST_PASSWORD = "floydian"
 
 
 @pytest.fixture()
@@ -58,5 +58,5 @@ def test_expenses(
     yield test_client, [expense1, expense2]
 
     for expense in [expense1, expense2]:
-        response = test_client.delete(f'/expenses/{expense["id"]}')
+        response = test_client.delete(f"/expenses/{expense['id']}")
         assert response.status_code in [HTTPStatus.NOT_FOUND, HTTPStatus.OK]

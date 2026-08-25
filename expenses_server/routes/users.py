@@ -36,12 +36,15 @@ async def login(
         )
         if not verify_password(form_data.password, user.password_hash):
             raise HTTPException(
-                status_code=HTTPStatus.BAD_REQUEST,
+                status_code=HTTPStatus.UNAUTHORIZED,
                 detail="Incorrect username or password",
+                headers={"WWW-Authenticate": "Bearer"},
             )
         access_token = create_access_token(data={"sub": user.username})
         return UserToken(access_token=access_token, token_type="bearer")
     except NoResultFound:
         raise HTTPException(
-            status_code=HTTPStatus.BAD_REQUEST, detail="Incorrect username or password"
+            status_code=HTTPStatus.UNAUTHORIZED,
+            detail="Incorrect username or password",
+            headers={"WWW-Authenticate": "Bearer"},
         )
