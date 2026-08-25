@@ -1,16 +1,12 @@
 from fastapi import APIRouter, FastAPI
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from passlib.context import CryptContext
-
 
 from .settings import settings
 
 from .routes.accounts import router as account_router
 from .routes.expenses import router as expense_router
 from .routes.users import router as user_router
-
-password_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 app = FastAPI()
 
