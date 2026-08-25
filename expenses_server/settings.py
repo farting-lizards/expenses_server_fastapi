@@ -5,7 +5,10 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=os.environ.get("ENV_FILE", ".env"))
+    # Later files win
+    model_config = SettingsConfigDict(
+        env_file=os.environ.get("ENV_FILE", (".env.dev", ".env"))
+    )
 
     db_url: PostgresDsn = PostgresDsn(
         "postgresql://expenses:expenses@localhost:15000/expenses"
