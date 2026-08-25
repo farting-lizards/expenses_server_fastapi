@@ -1,5 +1,5 @@
 from http import HTTPStatus
-from typing import Annotated, cast
+from typing import cast
 from fastapi import APIRouter, Depends, HTTPException
 from pydantic import UUID4
 
@@ -10,7 +10,6 @@ from ..db_models.category import Category
 from ..dtos.expenses import ExpenseDTO, ExpenseCreate, ExpenseUpdate
 from ..db_models.expense import Expense as DBExpense
 from sqlalchemy.orm import Session
-from ..security import oauth2_scheme
 
 router = APIRouter(prefix="/expenses")
 
@@ -38,9 +37,7 @@ async def create_expense(
 
 
 @router.get("", response_model=list[ExpenseDTO])
-async def get_all_expenses(
-    token: Annotated[str, Depends(oauth2_scheme)], session: Session = Depends(get_db)
-) -> list[ExpenseDTO]:
+async def get_all_expenses(session: Session = Depends(get_db)) -> list[ExpenseDTO]:
     db_expenses = session.query(DBExpense).order_by(DBExpense.timestamp.desc()).all()
     expenses = [ExpenseDTO.model_validate(expense) for expense in db_expenses]
     return expenses
