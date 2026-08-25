@@ -7,19 +7,24 @@
 sudo docker compose -f docker-compose.yml -p expenses_server up
 ```
 
-2. Start the server on port 8090:
+2. Create the db tables and seed categories/accounts (only needed on a fresh db):
+```sh
+poetry run alembic upgrade head
+```
+
+3. Start the server on port 8090:
 ```sh
 poetry run uvicorn expenses_server.main:app --reload --port=8090 --use-colors
 ```
 
-3. Running tests
+4. Running tests
 
 ```sh
 poetry run pytest # runs all tests
 poetry run pytest -s --pdb # helpful for debugging tests
 ```
 
-4. Kill the containers and remove volumes
+5. Kill the containers and remove volumes
 
 ```sh
 sudo docker compose -f docker-compose.yml -p expenses_server down --remove-orphans --volumes
